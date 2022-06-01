@@ -9,7 +9,7 @@
           <span>Film</span>
           <img class="idn" src="../assets/icons/films.svg" alt="" srcset="" />
         </div>
-        <div class="number">{{ films.length }}</div>
+        <div class="number">200</div>
         <p>20 more than yesterday</p>
       </div>
 
@@ -18,7 +18,7 @@
         <span>Starships</span>
         <img class="idn" src="../assets/icons/starships.svg" alt="" srcset="" />
       </div>
-      <div class="number">{{ $store.state.starships.length }}</div>
+      <div class="number">200</div>
       <p>20 more than yesterday</p>
     </div>
 
@@ -27,7 +27,7 @@
         <span>People</span>
         <img class="idn" src="../assets/icons/people.svg" alt="" srcset="" />
       </div>
-      <div class="number">{{ $store.state.people.length }}</div>
+      <div class="number">200</div>
       <p>20 more than yesterday</p>
     </div>
     <div class="box">
@@ -35,7 +35,7 @@
         <span>Species</span>
         <img class="idn" src="../assets/icons/species.svg" alt="" srcset="" />
       </div>
-      <div class="number">{{ $store.state.species.length }}</div>
+      <div class="number">200</div>
       <p>20 more than yesterday</p>
     </div>
     </div>
@@ -51,7 +51,7 @@
         <div>Episode ID</div>
         <div>Character</div>
       </div>
-      <div v-for="(film, index) in films" :key="index" class="table-head data">
+      <div @click="sendDetails(film.url)" v-for="(film, index) in films" :key="index" class="table-head data">
         <div><input type="checkbox" name="" id="" /></div>
         <div>{{ film.title }}</div>
         <div>{{ moment(film.created).format("d/M/YY") }}</div>
@@ -62,6 +62,12 @@
       </div>
     </div>
   </div>
+  <vue-element-loading
+    :active="show"
+    :is-full-screen="true"
+    background-color="rgba(255, 255, 255, .8)"
+    spinner="bar-fade-scale"
+  />
 </template>
 
 <script>
@@ -76,14 +82,32 @@ export default {
     NavBar,
   },
 
+  data() {
+    return {
+      show: true,
+    }
+  },
+
   async created() {
-    this.fetchFilms();
+    await this.fetchFilms();
+    this.show = false
   },
 
   methods: {
     ...mapActions({
       fetchFilms: "fetchFilms",
     }),
+
+    sendDetails(data) {
+      const id = data.split("/")
+      this.$router.push({
+        name: 'Film',
+        query: {
+          id: id[id.length - 2]
+        }
+      });
+
+    }
   },
 
   computed: {

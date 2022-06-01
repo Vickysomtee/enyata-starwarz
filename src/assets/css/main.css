@@ -19,6 +19,7 @@
     justify-content: space-between;
     color: #A4A7B7;
     border: 1px solid #E5E5E5;
+    cursor: pointer;
   }
   
   .table-head div {

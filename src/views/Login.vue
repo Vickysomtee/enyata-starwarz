@@ -13,23 +13,38 @@
             <label for="email">Email Address</label>
             <input
               type="email"
+              @change="validateEmail()"
               placeholder="kingsleyomin@enyata.com"
-              name=""
+              v-model="email"
               id=""
             />
+            <div v-if="buttonClicked && !email" class="required">
+              Email Required
+            </div>
+            {{msg}}
+           
           </div>
 
           <div class="inputs">
             <label for="password" class="password">Password</label>
-            <input type="password" placeholder="***********" name="" id="" />
+            <input
+              type="password"
+              placeholder="***********"
+              name=""
+              id=""
+              v-model="password"
+            />
+            <div v-if="buttonClicked && !password" class="required">
+              Password Required
+            </div>
           </div>
 
-          <button type="submit">Login</button>
+          <button @click.prevent="login" type="submit">Login</button>
 
           <div class="forgot">Forgot Password?</div>
         </form>
         <div class="policy">
-          Privacy Policy <span>and</span> Terms of services
+          Privacy Policy <span class="and">and</span> Terms of services
         </div>
       </div>
     </section>
@@ -39,6 +54,35 @@
 <script>
 export default {
   name: "Login",
+
+  data() {
+    return {
+      email: "",
+      password: "",
+      msg: "",
+      buttonClicked: false,
+    };
+  },
+
+  methods: {
+
+    validateEmail() {
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        return alert("Invalid emai address")
+      } 
+    },
+
+    login() {
+
+      this.validateEmail()
+
+      this.buttonClicked = true;
+      if (!this.email || !this.password) return;
+      this.$router.push({
+        name: "Overview",
+      })
+    },
+  },
 };
 </script>
 
@@ -82,15 +126,14 @@ form {
 h1 {
   color: #434854;
   position: relative;
-  right: 125px;
+  right: 142px;
 }
 
 p {
   color: #737373;
   position: relative;
-  right: 40px;
+  right: 53px;
   font-size: 16px;
-  font-weight: 600;
 }
 
 .inputs {
@@ -120,8 +163,15 @@ input {
   padding-left: 30px;
 }
 
+.required {
+  position: relative;
+  right: 100px;
+  top: 5px;
+  color: red;
+}
+
 ::placeholder {
-  color: #0B2253;
+  color: #0b2253;
   font-size: 16px;
   font-family: "inter", sans-serif;
 }
@@ -147,7 +197,7 @@ button {
   text-decoration: underline;
 }
 
-span {
+.span {
   font-size: 14px;
   color: #a4a7b7;
   text-decoration: none;
