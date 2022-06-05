@@ -9,7 +9,7 @@
           <span>Film</span>
           <img class="idn" src="../assets/icons/films.svg" alt="" srcset="" />
         </div>
-        <div class="number">200</div>
+        <div class="number">{{$store.state.films.length}}</div>
         <p>20 more than yesterday</p>
       </div>
 
@@ -18,7 +18,7 @@
         <span>Starships</span>
         <img class="idn" src="../assets/icons/starships.svg" alt="" srcset="" />
       </div>
-      <div class="number">200</div>
+      <div class="number">{{$store.state.starships.length}}</div>
       <p>20 more than yesterday</p>
     </div>
 
@@ -27,7 +27,7 @@
         <span>People</span>
         <img class="idn" src="../assets/icons/people.svg" alt="" srcset="" />
       </div>
-      <div class="number">200</div>
+      <div class="number">{{$store.state.people.length}}</div>
       <p>20 more than yesterday</p>
     </div>
     <div class="box">
@@ -35,7 +35,7 @@
         <span>Species</span>
         <img class="idn" src="../assets/icons/species.svg" alt="" srcset="" />
       </div>
-      <div class="number">200</div>
+      <div class="number">{{$store.state.species.length}}</div>
       <p>20 more than yesterday</p>
     </div>
     </div>

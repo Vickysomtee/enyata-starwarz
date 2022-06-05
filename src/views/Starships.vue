@@ -52,13 +52,13 @@ export default {
 
   data() {
     return {
-      show: true
-    }
+      show: true,
+    };
   },
 
   async created() {
     await this.fetchStarships();
-    this.show = false
+    this.show = false;
   },
 
   methods: {
@@ -86,4 +86,16 @@ export default {
 </script>
 
 <style scoped>
+
+.table-head div:first-of-type {
+  width: 2%;
+}
+
+.table-head div {
+  width: 18%;
+}
+
+.table-head div:nth-of-type(5), .table-head div:nth-of-type(6) {
+  width: 10%;
+}
 </style>

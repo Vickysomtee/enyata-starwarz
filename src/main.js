@@ -9,6 +9,11 @@ const app = createApp({
     render: ()=>h(App)
 });
 
+store.dispatch('fetchStarships')
+store.dispatch('fetchFilms')
+store.dispatch('fetchSpecies')
+store.dispatch('fetchPeople')
+
 app.config.globalProperties.moment = moment;
 
 app.use(store).use(router).mount('#app')

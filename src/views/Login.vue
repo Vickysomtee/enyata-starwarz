@@ -72,6 +72,12 @@ export default {
       } 
     },
 
+    validatePassword() {
+      if (!/^[0-9a-zA-Z]+$/.test(this.password)) {
+        return alert("Invalid Password")
+      }
+    },
+
     login() {
 
       this.validateEmail()
@@ -197,9 +203,11 @@ button {
   text-decoration: underline;
 }
 
-.span {
+.policy span {
   font-size: 14px;
   color: #a4a7b7;
-  text-decoration: none;
+  text-decoration: none !important;
+  top: 0;
+
 }
 </style>
